@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from "react-native";
+import Footer from "./src/footer/Footer";
+import { NativeRouter, Route, Routes } from "react-router-native";
+import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor} from './src/store/index'
+import HymnPage from "./src/hymn_page/HymnPage";
+import Menu from "./src/menu/Menu";
+import Info from "./src/info/Info";
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NativeRouter>
+          <View style={styles.container}>
+            <Info />
+            <Routes>
+              <Route path="/" element={<HymnPage />}></Route>
+              <Route path="/menu/:item" element={<Menu />}></Route>
+            </Routes>
+            <Footer />
+          </View>
+        </NativeRouter>
+        </PersistGate>
+        </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    paddingTop: 24,
   },
 });
+
+export default App
