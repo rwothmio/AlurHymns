@@ -1,5 +1,14 @@
-workflows:
-    sample-workflow:
-        name: AlurHymns Workflow
-        max_build_duration: 120
-        instance_type: mac_mini_m1
+workflow:
+  name: React Native Build
+
+scripts:
+  - name: Install Dependencies
+    script: npm install
+
+  - name: Build Android APK
+    script: |
+      cd android
+      ./gradlew assembleRelease
+
+publish:
+  - artifact: app/build/outputs/apk/release/*.apk
