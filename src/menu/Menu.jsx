@@ -6,7 +6,6 @@ import List from "../list/List";
 import Categories from "../categories/Categories";
 import Favorites from "../favorites/Favorites";
 import { useNavigate, useParams } from "react-router-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import hymns from "../hymnsData";
 
 const Item = (item) => {
